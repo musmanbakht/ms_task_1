@@ -8,20 +8,19 @@ import Home from "../pages/Home";
 import Sidebar from "../components/Sidebar/Sidebar";
 import "./index.css"; // Ensure Tailwind CSS is imported
 import "./tailwind.css"; // Import Tailwind CSS styles
+import Dashboard from "../pages/Dashboard";
 
 function App() {
   return (
     <Router>
-      <Sidebar />
-      <div className="flex">
-        {/* Sidebar always visible */}
-
+      <div>
         {/* Main content */}
-        <div className="flex-1 md:ml-64 p-6">
+        <div >
           <Routes>
             <Route path="/about" element={<About />} />
             <Route path="/" element={<Home />} />
             <Route path="/settings" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </div>
       </div>
