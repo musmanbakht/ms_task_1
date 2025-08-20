@@ -5,6 +5,7 @@ import HeaderStats from "../components/Headers/HeaderStats";
 import MapDashbaord from "../components/Maps/MapDashbaord";
 import CardLineChart from "../components/Cards/CardLineChart";
 import CardBarChart from "../components/Cards/CardBarChart";
+import PublicationsChart from "../components/Cards/PublicationsChart";
 const Dashboard = () => {
   return (
     <>
@@ -14,6 +15,9 @@ const Dashboard = () => {
         <AdminNavbar />
         <HeaderStats />
         <MapDashbaord />
+<div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
+  <PublicationsChart />
+</div>
         {/* <div className="flex flex-wrap">
           <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
             <CardLineChart />

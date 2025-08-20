@@ -15,7 +15,53 @@ let CustomIcon = L.icon({
 });
 
 function MapDashboard() {
-  const position = [40.748817, -73.985428]; // lat, lng
+  // Array of buildings
+  const buildings = [
+    {
+      name: "WITS Mining Institute",
+      position: [-26.191595151165995, 28.027011480860786],
+      publications: Math.floor(Math.random() * 100), // random between 0–99
+      lat: -26.191595151165995,
+      long: 28.027011480860786
+    },
+    {
+      name: "WITS School of Chemical and Metallurgical Engineering",
+      position: [-26.19294562633408, 28.029523893373515],
+      publications: 18,
+      lat: -26.19294562633408,
+      long: 28.029523893373515
+    }, {
+      lat: -26.189929298326433,
+      long: 28.02929325631473,
+      name: "University of the Witwatersrand School of Architecture & Planning",
+      publications: 25
+    },
+    {
+      lat: -26.1902413353888,
+      long: 28.028847583877866,
+      name: "Wits School of Construction Economics and Management",
+      publications: Math.floor(Math.random() * 100), // random between 0–99
+
+    },
+    {
+      lat: -26.191763730244592,
+      long: 28.02941236747876,
+      name: "School of Mechanical, Industrial and Aeronautical Engineering, WITS",
+      publications: Math.floor(Math.random() * 100), // random between 0–99
+    },
+    {
+      lat: -26.191594270214825,
+      long:  28.027200499993242,
+      name: "School of Electrical and Information Engineering (EIE)",
+      publications: Math.floor(Math.random() * 100), // random between 0–99
+    },
+    {
+      lat: -26.192142521254677,
+      long:  28.029511587901123,
+      name: "WITS School of Civil and Environmental Engineering",
+      publications: Math.floor(Math.random() * 100), // random between 0–99
+    }
+  ];
 
   return (
     <div className="p-8">
@@ -24,8 +70,8 @@ function MapDashboard() {
         style={{ width: "100%", height: "500px" }}
       >
         <MapContainer
-          center={position}
-          zoom={12}
+          center={[-26.1922, 28.0285]} // midpoint of the buildings
+          zoom={17}
           scrollWheelZoom={false}
           className="h-full w-full"
         >
@@ -33,12 +79,16 @@ function MapDashboard() {
             attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a>'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={position} icon={CustomIcon}>
-            <Popup>
-              <h2 className="font-bold">Destroyed Building</h2>
-              <p>Custom marker using your PNG image.</p>
-            </Popup>
-          </Marker>
+
+          {/* Loop through buildings to create markers */}
+          {buildings.map((building, index) => (
+            <Marker key={index} position={[building.lat, building.long]} icon={CustomIcon}>
+              <Popup>
+                <h2 className="font-bold">{building.name}</h2>
+                <p>Publications: {building.publications}</p>
+              </Popup>
+            </Marker>
+          ))}
         </MapContainer>
       </div>
     </div>
