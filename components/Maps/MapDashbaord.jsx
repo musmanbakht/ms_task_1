@@ -3,42 +3,44 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
-// Fix default icon issue in Leaflet + Webpack
-import iconUrl from "leaflet/dist/images/marker-icon.png";
-import iconShadow from "leaflet/dist/images/marker-shadow.png";
+// Import your custom icon
+import customIconUrl from "../../media/NicePng_destroyed-building-png_2913064.png";
 
-let DefaultIcon = L.icon({
-  iconUrl,
-  shadowUrl: iconShadow,
+// Create custom icon using your PNG
+let CustomIcon = L.icon({
+  iconUrl: customIconUrl,
+  iconSize: [32, 32], // size of the icon [width, height]
+  iconAnchor: [16, 32], // point of the icon which will correspond to marker's location
+  popupAnchor: [0, -32], // point from which the popup should open relative to the iconAnchor
 });
-
-L.Marker.prototype.options.icon = DefaultIcon;
 
 function MapDashboard() {
   const position = [40.748817, -73.985428]; // lat, lng
 
   return (
-    <div
-      className="relative w-full border border-gray-300 rounded-lg overflow-hidden"
-      style={{ height: "500px" }} // 👈 guarantees the map is visible
-    >
-      <MapContainer
-        center={position}
-        zoom={12}
-        scrollWheelZoom={false}
-        className="h-full w-full"
+    <div className="p-8">
+      <div
+        className="border border-gray-300 rounded-lg overflow-hidden"
+        style={{ width: "100%", height: "500px" }}
       >
-        <TileLayer
-          attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a>'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={position}>
-          <Popup>
-            <h2 className="font-bold">React Leaflet Map</h2>
-            <p>A free Admin for Tailwind CSS, React, and Leaflet.</p>
-          </Popup>
-        </Marker>
-      </MapContainer>
+        <MapContainer
+          center={position}
+          zoom={12}
+          scrollWheelZoom={false}
+          className="h-full w-full"
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a>'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={position} icon={CustomIcon}>
+            <Popup>
+              <h2 className="font-bold">Destroyed Building</h2>
+              <p>Custom marker using your PNG image.</p>
+            </Popup>
+          </Marker>
+        </MapContainer>
+      </div>
     </div>
   );
 }
