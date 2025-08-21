@@ -4,8 +4,10 @@ import React from "react";
 
 // import CardStats from "../components/Cards/CardStats.jsx";
 import CardStats from "../Cards/CardStats.jsx";
-
-export default function HeaderStats() {
+const defaultProps= {
+  count : "loading..."
+}
+export default function HeaderStats({facultyCount, departmentCount, publicationCount}) {
   return (
     <>
       {/* Header */}
@@ -17,7 +19,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Faculty"
-                  statTitle="1"
+                  statTitle= {facultyCount || defaultProps.count}
                   statArrow="up"
                   statPercent="3.48"
                   statPercentColor="text-emerald-500"
@@ -29,7 +31,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Departments"
-                  statTitle="7"
+                  statTitle={departmentCount || defaultProps.count}
                   statArrow="down"
                   statPercent="3.48"
                   statPercentColor="text-red-500"
@@ -41,7 +43,7 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Publications"
-                  statTitle="56"
+                  statTitle={publicationCount|| defaultProps.count}
                   statArrow="down"
                   statPercent="1.10"
                   statPercentColor="text-orange-500"
