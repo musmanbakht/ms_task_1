@@ -43,7 +43,7 @@ function MapDashboard() {
     };
     loadDepartments();
   }, []);
-
+console.log("DEPARTMENTS", departments);
   return (
     <div className="p-8">
       <div
@@ -83,7 +83,7 @@ function MapDashboard() {
                 <Popup>
                   <h2 className="font-bold">{dept.name}</h2>
                   <p>Publications: {dept.publicationCount}</p>
-                  <p>Faculty ID: {dept.facultyId}</p>
+                  <p>Faculty Name: {dept.faculty.name}</p>
                 </Popup>
               </Marker>
             ))}

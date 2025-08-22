@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   LineChart,
   Line,
@@ -9,22 +9,44 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-
-// Sample data
-const data = [
-  { year: 2018, mining: 15, chemical: 10 },
-  { year: 2019, mining: 22, chemical: 18 },
-  { year: 2020, mining: 30, chemical: 25 },
-  { year: 2021, mining: 45, chemical: 32 },
-  { year: 2022, mining: 38, chemical: 40 },
-  { year: 2023, mining: 50, chemical: 47 },
-  { year: 2024, mining: 65, chemical: 58 },
+const colors = [
+"#8884d8", // purple
+"#82ca9d", // green
+"#ff7300", // orange
+"#00c49f", // teal
+"#ff0000", // red
+"#a83279", // magenta
+"#005f73", // deep teal
+"#ffb703", // yellow-orange
 ];
 
-export default function PublicationsChart() {
+export default function PublicationsChart({
+  publicationCountPerMonth,
+  highlightDepartment = "School of Mining Engineering", // NEW PROP
+}) {
+  // Transform API response → chart format
+  const chartData = useMemo(() => {
+    const grouped = {};
+    console.log("pub counttttttt", publicationCountPerMonth);
+
+    publicationCountPerMonth.forEach((item) => {
+      const month = item.month.slice(0, 7); // YYYY-MM
+      if (!grouped[month]) {
+        grouped[month] = { month };
+      }
+      grouped[month][item.name] = Number(item.publicationCount);
+    });
+
+    return Object.values(grouped);
+  }, [publicationCountPerMonth]);
+
+  const departments = [
+    ...new Set(publicationCountPerMonth.map((item) => item.name)),
+  ];
+
   return (
     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white">
-      <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
+      <div className="rounded-t mb-0 px-2 py-3 bg-transparent">
         <div className="flex flex-wrap items-center">
           <div className="relative w-full max-w-full flex-grow flex-1">
             <h6 className="uppercase text-gray-500 mb-1 text-xs font-semibold">
@@ -37,31 +59,29 @@ export default function PublicationsChart() {
         </div>
       </div>
       <div className="p-4 flex-auto">
-        {/* Chart fills its parent */}
         <div className="relative h-350-px">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data}>
+            <LineChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="year" />
+              <XAxis dataKey="month" />
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line
-                type="monotone"
-                dataKey="mining"
-                stroke="#8884d8"
-                strokeWidth={3}
-                dot={{ r: 4 }}
-                name="Mining Institute"
-              />
-              <Line
-                type="monotone"
-                dataKey="chemical"
-                stroke="#82ca9d"
-                strokeWidth={3}
-                dot={{ r: 4 }}
-                name="Chemical & Metallurgical Eng."
-              />
+              {departments.map((dept, index) => {
+                const isHighlighted = dept === highlightDepartment;
+                return (
+                  <Line
+                    key={dept}
+                    type="monotone"
+                    dataKey={dept}
+                    name={dept}
+                    strokeWidth={isHighlighted ? 4 : 3}
+                    strokeOpacity={isHighlighted ? 1 : 0.5}
+                    dot={isHighlighted ? { r: 5 } : { r: 1 }}
+                    stroke={colors[index % colors.length]}
+                  />
+                );
+              })}
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -69,3 +89,5 @@ export default function PublicationsChart() {
     </div>
   );
 }
+
+
