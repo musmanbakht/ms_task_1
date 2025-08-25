@@ -22,6 +22,10 @@ export default {
         },
       },
     },
+    fontFamily: {
+      // Override the default font family
+      sans: ["Arial", "sans-serif"],
+    },
   },
   plugins: [],
 };

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "http://localhost:5001/api";
 
 async function fetchDepartments() {
   try {
@@ -20,6 +20,20 @@ async function dashboardStats() {
     throw error;
   }
 }
+async function getAllStaff(q, page, limit) {
+  try {
+    const params = new URLSearchParams({
+      ...(q && { q }),
+      ...(page && { page: page.toString() }),
+      ...(limit && { limit: limit.toString() }),
+    });
 
+    const response = await axios.get(`${BASE_URL}/staff?${params}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching staff:", error);
+    throw error;
+  }
+}
 
-export { fetchDepartments , dashboardStats};
+export { fetchDepartments, dashboardStats, getAllStaff };

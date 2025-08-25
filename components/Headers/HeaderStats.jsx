@@ -4,22 +4,28 @@ import React from "react";
 
 // import CardStats from "../components/Cards/CardStats.jsx";
 import CardStats from "../Cards/CardStats.jsx";
-const defaultProps= {
-  count : "loading..."
-}
-export default function HeaderStats({facultyCount, departmentCount, publicationCount}) {
+const defaultProps = {
+  count: "loading...",
+  leadingSchool: "loading...",
+};
+export default function HeaderStats({
+  facultyCount,
+  departmentCount,
+  publicationCount,
+  leadingSchool,
+}) {
   return (
     <>
       {/* Header */}
-      <div className="relative bg-blueGray-800 md:pt-32 pb-32 pt-12">
-        <div className="px-4 md:px-10 mx-auto w-full">
+      <div className="relative md:pt-28 pb-10 pt-12">
+        <div className="px-4 md:px-10 mx-auto w-full  mt-12">
           <div>
             {/* Card stats */}
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Faculty"
-                  statTitle= {facultyCount || defaultProps.count}
+                  statTitle={"FEBE" || defaultProps.count}
                   statArrow="up"
                   statPercent="3.48"
                   statPercentColor="text-emerald-500"
@@ -30,7 +36,7 @@ export default function HeaderStats({facultyCount, departmentCount, publicationC
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="Departments"
+                  statSubtitle="Schools"
                   statTitle={departmentCount || defaultProps.count}
                   statArrow="down"
                   statPercent="3.48"
@@ -43,7 +49,7 @@ export default function HeaderStats({facultyCount, departmentCount, publicationC
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Publications"
-                  statTitle={publicationCount|| defaultProps.count}
+                  statTitle={publicationCount || defaultProps.count}
                   statArrow="down"
                   statPercent="1.10"
                   statPercentColor="text-orange-500"
@@ -55,8 +61,8 @@ export default function HeaderStats({facultyCount, departmentCount, publicationC
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="PERFORMANCE"
-                  statTitle="49,65%"
+                  statSubtitle="Leading School"
+                  statTitle={leadingSchool || defaultProps.leadingSchool}
                   statArrow="up"
                   statPercent="12"
                   statPercentColor="text-emerald-500"

@@ -5,7 +5,7 @@ import L from "leaflet";
 import { fetchDepartments } from "../../API/index"; // axios function
 
 // Custom icon
-import customIconUrl from "../../media/NicePng_destroyed-building-png_2913064.png";
+import customIconUrl from "../../media/building_black.png";
 
 let CustomIcon = L.icon({
   iconUrl: customIconUrl,
@@ -43,9 +43,9 @@ function MapDashboard() {
     };
     loadDepartments();
   }, []);
-console.log("DEPARTMENTS", departments);
+  console.log("DEPARTMENTS", departments);
   return (
-    <div className="p-8">
+    <div className="p-4">
       <div
         className="relative border border-gray-300 rounded-lg overflow-hidden"
         style={{ width: "100%", height: "500px" }}
@@ -88,7 +88,9 @@ console.log("DEPARTMENTS", departments);
               </Marker>
             ))}
 
-            {selected && <RecenterMap lat={selected.lat} long={selected.long} />}
+            {selected && (
+              <RecenterMap lat={selected.lat} long={selected.long} />
+            )}
           </MapContainer>
         )}
       </div>

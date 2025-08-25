@@ -42,17 +42,18 @@ const Dashboard = () => {
     <>
       <Sidebar />
 
-      <div className="relative md:ml-64 bg-blueGray-100">
+      <div className="relative md:ml-64 bg-blueGray-100 p-8">
         <AdminNavbar />
         <HeaderStats
-          facultyCount={dashboardData.facultyCount}
+          facultyCount={dashboardData.facultyCount || 0}
           departmentCount={dashboardData.departmentCount}
           publicationCount={dashboardData.publicationCount}
+          leadingSchool={dashboardData.leadingSchool}
         />
         <div className="mx-8 my-4">
           <MapDashbaord />
           <div className="flex flex-wrap">
-            <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
+            <div className="w-full xl:w-8/12 mb-12 xl:mb-0 pl-4">
               {!loading && (
                 <PublicationsChart
                   publicationCountPerMonth={

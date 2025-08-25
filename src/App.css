@@ -8,6 +8,11 @@ body {
   margin: 0;
   min-height: 100vh;
 }
+.recharts-surface:focus,
+.recharts-wrapper:focus {
+  outline: none !important;
+}
+
 
 /* #root {
   max-width: 1280px;

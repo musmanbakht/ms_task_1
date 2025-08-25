@@ -3,6 +3,7 @@
 // import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 // import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
 // import UserDropdown from "components/Dropdowns/UserDropdown.js";
@@ -26,10 +27,10 @@ export default function Sidebar() {
           </button>
           {/* Brand */}
           <Link
-            href="/"
+            to="/"
             className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
           >
-            My App
+            FEBE R&I Dashboard
           </Link>
           {/* User */}
           {/* <ul className="md:hidden items-center flex flex-wrap list-none">
@@ -52,7 +53,7 @@ export default function Sidebar() {
               <div className="flex flex-wrap">
                 <div className="w-6/12">
                   <Link
-                    href="/"
+                    to="/"
                     className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                   >
                     Notus NextJS
@@ -84,17 +85,17 @@ export default function Sidebar() {
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
             <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Admin Layout Pages
+              Pages
             </h6>
             {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li className="items-center">
                 <Link
-                  href="/admin/dashboard"
+                  to="/dashboard"
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (location.pathname.indexOf("/admin/dashboard") !== -1
+                    (location.pathname.indexOf("/dashboard") !== -1
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
@@ -102,7 +103,7 @@ export default function Sidebar() {
                   <i
                     className={
                       "fas fa-tv mr-2 text-sm " +
-                      (location.pathname.indexOf("/admin/dashboard") !== -1
+                      (location.pathname.indexOf("/dashboard") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
@@ -113,10 +114,10 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <Link
-                  href="/admin/settings"
+                  to="/publications"
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (location.pathname.indexOf("/admin/settings") !== -1
+                    (location.pathname.indexOf("/publications") !== -1
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
@@ -129,16 +130,16 @@ export default function Sidebar() {
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  Settings
+                  Publications
                 </Link>
               </li>
 
               <li className="items-center">
                 <Link
-                  href="/admin/tables"
+                  to="/staff"
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (location.pathname.indexOf("/admin/tables") !== -1
+                    (location.pathname.indexOf("/staff") !== -1
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
@@ -146,18 +147,35 @@ export default function Sidebar() {
                   <i
                     className={
                       "fas fa-table mr-2 text-sm " +
-                      (location.pathname.indexOf("/admin/tables") !== -1
+                      (location.pathname.indexOf("/staff") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  Tables
+                  Staff
                 </Link>
+                {/* <NavLink
+                  to="/staff"
+                  className={({ isActive }) =>
+                    "text-xs uppercase py-3 font-bold block " +
+                    (isActive
+                      ? "text-bluegray-900 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                >
+                  <i
+                    className={({ isActive }) =>
+                      "fas fa-table mr-2 text-sm " +
+                      (isActive ? "opacity-75" : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Staff
+                </NavLink> */}
               </li>
 
               <li className="items-center">
                 <Link
-                  href="/admin/maps"
+                  to="/patents"
                   className={
                     "text-xs uppercase py-3 font-bold block " +
                     (location.pathname.indexOf("/admin/maps") !== -1
@@ -168,12 +186,12 @@ export default function Sidebar() {
                   <i
                     className={
                       "fas fa-map-marked mr-2 text-sm " +
-                      (location.pathname.indexOf("/admin/maps") !== -1
+                      (location.pathname.indexOf("/patents") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  Maps
+                  Patents
                 </Link>
               </li>
             </ul>
@@ -182,14 +200,14 @@ export default function Sidebar() {
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}
             <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Auth Layout Pages
+              Admin Panel
             </h6>
             {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link
-                  href="/auth/login"
+                  to="/auth/login"
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                 >
                   <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{" "}
@@ -199,7 +217,7 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <Link
-                  href="/auth/register"
+                  to="/auth/register"
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                 >
                   <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i>{" "}
@@ -209,17 +227,17 @@ export default function Sidebar() {
             </ul>
 
             {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
+            {/* <hr className="my-4 md:min-w-full" /> */}
             {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+            {/* <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               No Layout Pages
-            </h6>
+            </h6> */}
             {/* Navigation */}
 
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+            {/* <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link
-                  href="/landing"
+                  to="/landing"
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                 >
                   <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>{" "}
@@ -229,17 +247,17 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <Link
-                  href="/profile"
+                  to="/profile"
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                 >
                   <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{" "}
                   Profile Page
                 </Link>
               </li>
-            </ul>
+            </ul> */}
 
             {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
+            {/* <hr className="my-4 md:min-w-full" /> */}
             {/* Heading */}
             {/* <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               Documentation
@@ -248,7 +266,7 @@ export default function Sidebar() {
             {/* <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="inline-flex">
                 <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/colors/notus"
+                  to="https://www.creative-tim.com/learning-lab/tailwind/nextjs/colors/notus"
                   target="_blank"
                   className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
                 >
@@ -259,7 +277,7 @@ export default function Sidebar() {
 
               <li className="inline-flex">
                 <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/alerts/notus"
+                  to="https://www.creative-tim.com/learning-lab/tailwind/nextjs/alerts/notus"
                   target="_blank"
                   className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
                 >
@@ -271,7 +289,7 @@ export default function Sidebar() {
               <li className="inline-flex">
                 <a
                   aria-disabled
-                  href="#!"
+                  to="#!"
                   className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
                 >
                   <i className="fab fa-angular mr-2 text-blueGray-300 text-base"></i>
@@ -282,7 +300,7 @@ export default function Sidebar() {
               <li className="inline-flex">
                 <a
                   aria-disabled
-                  href="#!"
+                  to="#!"
                   className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
                 >
                   <i className="fab fa-js-square mr-2 text-blueGray-300 text-base"></i>
@@ -292,7 +310,7 @@ export default function Sidebar() {
 
               <li className="inline-flex">
                 <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/overview/notus"
+                  to="https://www.creative-tim.com/learning-lab/tailwind/nextjs/overview/notus"
                   target="_blank"
                   className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
                 >
@@ -304,7 +322,7 @@ export default function Sidebar() {
               <li className="inline-flex">
                 <a
                   aria-disabled
-                  href="#!"
+                  to="#!"
                   className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
                 >
                   <i className="fab fa-react mr-2 text-blueGray-300 text-base"></i>
@@ -315,7 +333,7 @@ export default function Sidebar() {
               <li className="inline-flex">
                 <a
                   aria-disabled
-                  href="#!"
+                  to="#!"
                   className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
                 >
                   <i className="fas fa-link mr-2 text-blueGray-300 text-base"></i>
@@ -326,7 +344,7 @@ export default function Sidebar() {
               <li className="inline-flex">
                 <a
                   aria-disabled
-                  href="#!"
+                  to="#!"
                   className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
                 >
                   <i className="fab fa-vuejs mr-2 text-blueGray-300 text-base"></i>
