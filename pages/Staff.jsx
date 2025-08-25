@@ -9,6 +9,7 @@ import * as Checkbox from "@radix-ui/react-checkbox";
 // import * as Select from "@radix-ui/react-select";
 // import * as Dialog from "@radix-ui/react-dialog";
 // import * as Tooltip from "@radix-ui/react-tooltip";
+// import * as Select from "@radix-ui/react-select";
 import { Dialog } from "radix-ui";
 import { Tooltip } from "radix-ui";
 import { PlusIcon } from "@radix-ui/react-icons";
@@ -16,6 +17,7 @@ import { getAllStaff } from "../API/index"; // <- your API function
 import { Select } from "radix-ui";
 import Sidebar from "../components/Sidebar/Sidebar";
 import AdminNavbar from "../components/Navbars/AdminNavbar";
+import { Button } from "@radix-ui/themes";
 
 export default function StaffManagement() {
   const [staff, setStaff] = useState([]);
@@ -40,6 +42,7 @@ export default function StaffManagement() {
       setStaff(allStaff || []);
       setTotalPages(metadata.totalPages);
       setPage(metadata.page); // ensure sync with backend
+      setMetadata(metadata);
     } catch (err) {
       console.error("Error fetching staff:", err);
     } finally {
@@ -74,12 +77,9 @@ export default function StaffManagement() {
       d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
     );
   };
-  console.log("DEL MODAL TRIGGERED", deleteModalOpen);
   return (
     <>
-      <Sidebar />
-
-      <div className="relative md:ml-64 bg-blueGray-100">
+      <div>
         <AdminNavbar />
         <div className="flex flex-col h-full bg-gray-100 overflow-hidden py-16">
           <main className="container min-w-full mx-auto flex-grow px-6 py-8">
@@ -90,7 +90,7 @@ export default function StaffManagement() {
                   <h2 className="text-xl font-bold text-gray-700">
                     Staff Management
                   </h2>
-
+                  
                   <div className="flex gap-2 items-center">
                     {selectedRows.length > 0 && (
                       <button
@@ -165,7 +165,7 @@ export default function StaffManagement() {
                             </td>
                             <td className="px-4 py-2 text-center">
                               <div className="flex justify-center gap-2">
-                                <Tooltip.Provider>
+                                {/* <Tooltip.Provider>
                                   <Tooltip.Root>
                                     <Tooltip.Trigger asChild>
                                       <button className="text-gray-500 hover:text-green-600">
@@ -174,7 +174,7 @@ export default function StaffManagement() {
                                     </Tooltip.Trigger>
                                     <Tooltip.Content>View</Tooltip.Content>
                                   </Tooltip.Root>
-                                </Tooltip.Provider>
+                                </Tooltip.Provider> */}
 
                                 <Tooltip.Provider>
                                   <Tooltip.Root>
@@ -200,7 +200,7 @@ export default function StaffManagement() {
                                     <Tooltip.Content>Delete</Tooltip.Content>
                                   </Tooltip.Root>
                                 </Tooltip.Provider>
-                                <Tooltip.Provider>
+                                {/* <Tooltip.Provider>
                                   <Tooltip.Root>
                                     <Tooltip.Trigger asChild>
                                       <button className="IconButton">
@@ -217,7 +217,7 @@ export default function StaffManagement() {
                                       </Tooltip.Content>
                                     </Tooltip.Portal>
                                   </Tooltip.Root>
-                                </Tooltip.Provider>
+                                </Tooltip.Provider> */}
                               </div>
                             </td>
                           </tr>
@@ -233,44 +233,92 @@ export default function StaffManagement() {
 
                 {/* Pagination */}
                 {staff.length > 0 && (
+                  
                   <div className="flex justify-end items-center gap-4 mt-5">
-                    {/* <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-600">Rows:</span>
-                  <Select.Root
-                    value={String(limit)}
-                    onValueChange={(v) => {
-                      setLimit(Number(v));
-                      setPage(1);
-                    }}
-                  >
-                    <Select.Trigger className="px-2 py-1 border rounded w-20" />
-                    <Select.Content>
-                      {[5, 10, 15, 20].map((n) => (
-                        <Select.Item key={n} value={String(n)}>
-                          {n}
-                        </Select.Item>
-                      ))}
-                    </Select.Content>
-                  </Select.Root>
-                </div> */}
+
                     <div className="flex items-center gap-2">
-                      <button
-                        disabled={page === 1}
-                        onClick={() => setPage((p) => p - 1)}
-                        className="px-3 py-1 border rounded disabled:opacity-50"
+                       <h2 className="text-md font-normal text-gray-700 rounded-full">
+                    {metadata.total} Records
+                  </h2>
+                      <span className="text-sm text-gray-600 px-2">Rows:</span>
+                      <Select.Root
+                        value={String(limit)}
+                        onValueChange={(v) => {
+                          setLimit(Number(v));
+                          setPage(1);
+                        }}
                       >
-                        Prev
-                      </button>
+                        <Select.Trigger
+                        // radius ="full"
+                        className="px-3 py-1 border rounded-full w-20 flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blueGray-600 focus:border-blueGray-600"
+                        >
+                          <Select.Value />
+                          <div className="px-2">
+                            <Select.Icon>
+                              <svg width="16" height="16" fill="none">
+                                <path
+                                  d="M4 6l4 4 4-4"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            </Select.Icon>
+                          </div>
+                        </Select.Trigger>
+                        <Select.Portal>
+                          <Select.Content className="bg-white border rounded shadow-lg">
+                            <Select.Viewport>
+                              {[5, 10, 15, 20].map((n) => (
+                                <Select.Item
+                                  key={n}
+                                  value={String(n)}
+                                  className="px-3 py-2 cursor-pointer hover:bg-gray-100"
+                                >
+                                  <Select.ItemText>{n}</Select.ItemText>
+                                </Select.Item>
+                              ))}
+                            </Select.Viewport>
+                          </Select.Content>
+                        </Select.Portal>
+                      </Select.Root>
+                    </div>
+                    
+                    <div className="flex items-center gap-4">
+                      <div className="px-2">
+                        <Button
+                          radius="full"
+                          variant="soft"
+                          disabled={page === 1}
+                          onClick={() => setPage((p) => p - 1)}
+                          // className="px-3 py-1 border rounded disabled:opacity-50"
+                        >
+                          Prev
+                        </Button>
+                      </div>
+
                       <span>
                         {page} / {totalPages}
                       </span>
-                      <button
+                      {/* <button
                         disabled={page === totalPages}
                         onClick={() => setPage((p) => p + 1)}
                         className="px-3 py-1 border rounded disabled:opacity-50"
                       >
                         Next
-                      </button>
+                      </button> */}
+                      <div className="px-2">
+                        <Button
+                          radius="full"
+                          variant="soft"
+                          className="px-3 py-1"
+                          disabled={page === totalPages}
+                          onClick={() => setPage((p) => p + 1)}
+                        >
+                          Next
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 )}

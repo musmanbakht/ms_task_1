@@ -35,5 +35,20 @@ async function getAllStaff(q, page, limit) {
     throw error;
   }
 }
+async function getAllPatents(q, page, limit) {
+  try {
+    const params = new URLSearchParams({
+      ...(q && { q }),
+      ...(page && { page: page.toString() }),
+      ...(limit && { limit: limit.toString() }),
+    });
 
-export { fetchDepartments, dashboardStats, getAllStaff };
+    const response = await axios.get(`${BASE_URL}/patent?${params}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching staff:", error);
+    throw error;
+  }
+}
+
+export { fetchDepartments, dashboardStats, getAllStaff , getAllPatents};

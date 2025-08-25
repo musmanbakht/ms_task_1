@@ -56,7 +56,7 @@ export default function Sidebar() {
                     to="/"
                     className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                   >
-                    Notus NextJS
+                    FEBE R&I Dashboard{" "}
                   </Link>
                 </div>
                 <div className="w-6/12 flex justify-end">
@@ -112,12 +112,12 @@ export default function Sidebar() {
                 </Link>
               </li>
 
-              <li className="items-center">
+              {/* <li className="items-center">
                 <Link
-                  to="/publications"
+                  to="/patents"
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (location.pathname.indexOf("/publications") !== -1
+                    (location.pathname.indexOf("/patents") !== -1
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
@@ -125,14 +125,14 @@ export default function Sidebar() {
                   <i
                     className={
                       "fas fa-tools mr-2 text-sm " +
-                      (location.pathname.indexOf("/admin/settings") !== -1
+                      (location.pathname.indexOf("/patents") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  Publications
+                  Patents
                 </Link>
-              </li>
+              </li> */}
 
               <li className="items-center">
                 <Link

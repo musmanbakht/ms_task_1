@@ -3,16 +3,39 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { fetchDepartments } from "../../API/index"; // axios function
-
+import customIconBlack from "../../media/building_black.png";
+import customIconGreen from "../../media/building_green.png";
+import customIconBlue from "../../media/building_blue.png";
+import buildingSvg from "../../media/building_black.svg";
 // Custom icon
-import customIconUrl from "../../media/building_black.png";
+// import customIconUrl from "../../media/building_black.png";
 
-let CustomIcon = L.icon({
-  iconUrl: customIconUrl,
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32],
-});
+// let CustomIcon = L.icon({
+//   iconUrl: customIconUrl,
+//   iconSize: [32, 32],
+//   iconAnchor: [16, 32],
+//   popupAnchor: [0, -32],
+// });
+
+
+function getCustomIcon(publicationCount) {
+  let iconUrl = customIconBlack;
+  if (publicationCount < 15) {
+    iconUrl = customIconBlack;
+  } else if (publicationCount > 20) {
+    iconUrl = customIconGreen;
+  } else {
+    iconUrl = customIconBlue;
+  }
+
+  return L.icon({
+    iconUrl,
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  });
+}
+
 
 // Recenter map with animation
 function RecenterMap({ lat, long }) {
@@ -73,7 +96,7 @@ function MapDashboard() {
               <Marker
                 key={dept.id}
                 position={[dept.lat, dept.long]}
-                icon={CustomIcon}
+                icon={getCustomIcon(dept.publicationCount)}
                 eventHandlers={{
                   click: () => {
                     setSelected({ lat: dept.lat, long: dept.long });

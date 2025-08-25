@@ -10,6 +10,8 @@ import "./index.css"; // Ensure Tailwind CSS is imported
 import "./tailwind.css"; // Import Tailwind CSS styles
 import Dashboard from "../pages/Dashboard";
 import Staff from "../pages/Staff";
+import Patents from "../pages/Patents";
+import LayoutWithSidebar from "../layout/LayoutWithSidebar";
 
 function App() {
   return (
@@ -21,8 +23,15 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/" element={<Home />} />
             <Route path="/settings" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            {/* <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/staff" element={<Staff />} />
+            <Route path="/patents" element={<Patents />} /> */}
+            {/* Pages with sidebar */}
+            <Route element={<LayoutWithSidebar />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/staff" element={<Staff />} />
+              <Route path="/patents" element={<Patents />} />
+            </Route>
           </Routes>
         </div>
       </div>

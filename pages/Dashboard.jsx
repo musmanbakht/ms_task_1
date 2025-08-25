@@ -8,6 +8,7 @@ import CardBarChart from "../components/Cards/CardBarChart";
 import PublicationsChart from "../components/Cards/PublicationsChart";
 import { dashboardStats, fetchDepartments } from "../API";
 import PublicationsBarChart from "../components/Cards/PublicationsBarChart";
+import DepartmentPieChart from "../components/Cards/Dashboard/DepartmentPieChart";
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,7 +23,6 @@ const Dashboard = () => {
           dashboardStats(),
           fetchDepartments(),
         ]);
-        console.log(">>>>>>>>>>>>>>>>>", res1.data);
         setDashboardData(res1.data || null);
         setDepartmentData(res2.allDepartments || []);
       } catch (err) {
@@ -40,9 +40,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <Sidebar />
-
-      <div className="relative md:ml-64 bg-blueGray-100 p-8">
+      {/* <div className="relative md:ml-64 bg-blueGray-100 p-8"> */}
+      <div >
         <AdminNavbar />
         <HeaderStats
           facultyCount={dashboardData.facultyCount || 0}
@@ -70,6 +69,24 @@ const Dashboard = () => {
                 />
               )}
             </div>
+          </div>
+           <div className="flex flex-wrap">
+            <div className="w-[300px] h-[300px] xl:w-4/12 mb-12 xl:mb-0 pl-4">
+              {!loading && (
+                <DepartmentPieChart
+                  data={departmentData}
+                  totalPublications={dashboardData.publicationCount || 1}
+                />
+              )}
+            </div>
+            {/* <div className="w-full xl:w-8/12 px-4">
+              {!loading && departmentData && (
+                <PublicationsBarChart
+                  allDepartments={departmentData}
+                  highlightDepartment="School of Mining Engineering"
+                />
+              )}
+            </div> */}
           </div>
         </div>
 
